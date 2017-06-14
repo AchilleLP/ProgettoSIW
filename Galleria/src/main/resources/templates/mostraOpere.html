@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+
+<title>Opere</title>
+</head>
+<body>
+	<h1>Lista opere</h1>
+	
+	<div th:each="opera : ${opere}">
+		<a th:href="@{opere/}+${opera.id}" th:text="${opera.titolo}">Titolo</a>
+		<form th:action="@{opere/}+${opera.id}" th:method="delete">
+			<input type="submit" value="cancella"/>
+		</form>
+	</div>
+
+</body>
+</html>

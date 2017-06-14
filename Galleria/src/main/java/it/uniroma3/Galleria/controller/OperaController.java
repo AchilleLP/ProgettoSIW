@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import it.uniroma3.Galleria.model.Opera;
 import it.uniroma3.Galleria.service.OperaService;
@@ -18,22 +21,25 @@ public class OperaController {
 	private OperaService operaService;
 	
 	@RequestMapping("/opere")
-	public List<Opera> getOpere(){
-		return operaService.findAll();
+	public String getOpere(Model model){
+		model.addAttribute("opere",operaService.findAll());
+		return "mostraOpere";
 	}
 	
 	@RequestMapping("/opere/{id}")
 	//per collegare {id} con id del metodo basta aggiungere @PathVariable
 	//se il la variabile del metodo aveva un nome diverso era necessario aggiungere
 	//@PathVariable("id")
-	public Opera getOpera(@PathVariable Long id){
-		return operaService.findbyId(id);
+	public String getOpera(@PathVariable Long id,Model model){
+		model.addAttribute("opera",operaService.findbyId(id));
+		return "opera";
 	}
 	
 	
 	@RequestMapping(value="/opere",method=RequestMethod.POST)
-	public void addOpera(@RequestBody Opera opera){
+	public String addOpera(@ModelAttribute Opera opera){
 		operaService.add(opera);
+		return "redirect:/index.html";
 	}
 	
 	//metodo per modificare un opera inserita
@@ -45,8 +51,9 @@ public class OperaController {
 	
 	//metodo per cancellare opera
 	@RequestMapping(value="/opere/{id}",method=RequestMethod.DELETE)
-	public void deleteOpera(@PathVariable Long id){
+	public String deleteOpera(@PathVariable Long id){
 		operaService.delete(id);
+		return "redirect:/index.html";
 	}
 
 }
