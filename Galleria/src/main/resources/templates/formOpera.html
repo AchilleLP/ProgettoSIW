@@ -1,10 +1,30 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
-    <title>Inserisci Opera</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
-  <body>
- Welcome!
-  </body>
+<title>Nuova Opera</title>
+</head>
+<body>
+
+	<h2>Nuova Opera </h2>
+		
+	<form th:action="@{opere}" th:object="${opera}" method="post">
+		<div>
+			<label>Titolo</label> <input th:field="*{titolo}" type="text"/>
+		</div>
+		<div>
+			<label>Tecnica</label> <input th:field="*{tecnica}" type="text"/>
+		</div>
+		<div>
+			<label>Anno di realizzazione</label> <input th:field="*{dataRealizzazione}" type="text"/>
+		</div>
+		<div>
+			<label>Dimensione</label> <input th:field="*{dimensione}" type="text"/>
+		</div>
+		<div>
+			<input type="submit" value="salva"/>
+		</div>
+		
+	</form>	
+</body>
+
 </html>
