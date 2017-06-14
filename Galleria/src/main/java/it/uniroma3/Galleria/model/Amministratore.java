@@ -13,6 +13,7 @@ import it.uniroma3.Galleria.model.Role;
 public class Amministratore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	private Long id;
 	private String nickname;
 	private String password;

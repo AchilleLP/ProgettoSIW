@@ -61,7 +61,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- marked the embedded servlet container as provided -->
+	
 	</dependencies>
+	
+	
 
 	<build>
 		<plugins>
@@ -71,6 +75,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>

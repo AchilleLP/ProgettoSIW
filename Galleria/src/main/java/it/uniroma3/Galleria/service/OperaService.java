@@ -29,11 +29,13 @@ public class OperaService {
 	    public void add(final Opera opera) {
 	        this.operaRepository.save(opera);
 	    }
-
+	    
+	    @Transactional
 		public Opera findbyId(Long id) {
 			return this.operaRepository.findOne(id);
 		}
-		
+	    
+		@Transactional
 		public void delete(Long id){
 			this.operaRepository.delete(id);
 		}
