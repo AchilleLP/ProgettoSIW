@@ -6,10 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import it.uniroma3.Galleria.model.Amministratore;
 import it.uniroma3.Galleria.model.Privilege;
 import it.uniroma3.Galleria.model.Role;
+import it.uniroma3.Galleria.repository.AmministratoreRepository;
 import it.uniroma3.Galleria.repository.PrivilegeRepository;
 import it.uniroma3.Galleria.repository.RoleRepository;
 
@@ -24,7 +28,14 @@ public class InitialDataLoader implements
   
     @Autowired
     private PrivilegeRepository privilegeRepository;
+ 
+    @Autowired
+    private AmministratoreService amministratoreService;
   
+    @Autowired
+    private AmministratoreRepository amministratoreRepository;
+    
+    
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -40,7 +51,7 @@ public class InitialDataLoader implements
           readPrivilege, writePrivilege);        
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
         createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
- 
+        createAmministratoreIfNotFound("admin","password");
         alreadySetup = true;
     }
  
@@ -67,4 +78,19 @@ public class InitialDataLoader implements
         }
         return role;
     }
+    
+    @Transactional 
+    private Amministratore createAmministratoreIfNotFound(String nick,String password){
+    	Amministratore admin= amministratoreRepository.findByNickname(nick);
+ 
+    	if (admin==null){
+    		admin=new Amministratore(nick,password);
+    		this.amministratoreService.addAmministratore(admin);
+    	}
+    	return admin;
+    }
+    
 }
+    
+    
+    

@@ -45,6 +45,15 @@ public class Amministratore {
 	public Amministratore(){
 		enabled=true;
 	}
+	
+	public Amministratore(String nick,String password){
+		enabled=true;
+		this.nickname=nick;
+		this.password=password;
+	}
+	
+	
+	
 	public boolean checkPassword(String password){
 		return this.password.equals(password);
 	}

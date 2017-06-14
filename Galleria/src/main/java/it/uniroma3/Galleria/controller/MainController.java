@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.uniroma3.Galleria.model.Amministratore;
 import it.uniroma3.Galleria.model.Opera;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,13 @@ public class MainController {
 	    return "login";
 	  }
 	  
+	  //index
+	  @GetMapping("/")
+	  public String getIndex(Model model) {
+		  model.addAttribute("autenticato", true);
+	    return "redirect:/index.html";
+	  }
+	  
 	  // Login form with error
 	  @RequestMapping("/login-error.html")
 	  public String loginError(Model model) {
@@ -35,6 +43,12 @@ public class MainController {
 
 		model.addAttribute("opera", new Opera());
 	    return "formOpera";
+	  }
+	  
+	  @RequestMapping("/formAmministratore")
+	  public String formAmministratore(Model model){
+		  model.addAttribute("admin", new Amministratore());
+		  return "formAmministratore";
 	  }
 	  
 	  
