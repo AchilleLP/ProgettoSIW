@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().permitAll()
             .and()
         .formLogin()
-     .loginPage("/login").defaultSuccessUrl("/formOpera")
+     .loginPage("/login").defaultSuccessUrl("/")
             .usernameParameter("nickname").passwordParameter("password")
             .permitAll()
             .and()
