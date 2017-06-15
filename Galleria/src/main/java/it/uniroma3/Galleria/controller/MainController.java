@@ -7,16 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.uniroma3.Galleria.model.Amministratore;
-<<<<<<< HEAD
-=======
-import it.uniroma3.Galleria.model.Autore;
+
 import it.uniroma3.Galleria.model.Opera;
 import it.uniroma3.Galleria.service.AutoreSevice;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-
->>>>>>> branch 'master' of https://github.com/AchilleLP/ProgettoSIW.git
-import it.uniroma3.Galleria.model.Opera;
 
 @Controller
 public class MainController {
