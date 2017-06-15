@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form th:action="@{opere/nuovoAutore}" th:method="post" th:object="${autore}">
+		<div>
+			<label>Nome</label> <input th:field="*{nome}" type="text"/>
+		</div>
+		<div>
+			<label>Cognome</label> <input th:field="*{cognome}" type="text"/>
+		</div>
+		<div>
+			<input type="submit" value="registra"/>
+		</div>
+		
+	</form>
+
+</body>
+</html>

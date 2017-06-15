@@ -11,6 +11,7 @@
 		<p th:text="${opera.tecnica}">Tecnica</p>
 		<p th:text="${opera.dimensione}">Dimensione</p>
 		<p th:text="${opera.dataRealizzazione}">Anno di realizzazione</p>
-
+		<a th:href="@{autore/}+${opera.autore.id}" th:text="${opera.autore.nome}"></a>
+			
 </body>
 </html>
