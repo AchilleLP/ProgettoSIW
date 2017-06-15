@@ -9,6 +9,12 @@
 		
 	<form th:action="@{opere}" th:object="${opera}" method="post">
 		<div>
+		<select th:field="*{autore}">
+  			<option selected="selected" value="">Autore non presente</option>
+ 		 	<option th:each="aut : ${autori}" th:value="${aut.id}" th:text="${aut.nome}"></option>
+		</select>
+		</div>
+		<div>
 			<label>Titolo</label> <input th:field="*{titolo}" type="text"/>
 		</div>
 		<div>
@@ -20,12 +26,21 @@
 		<div>
 			<label>Dimensione</label> <input th:field="*{dimensione}" type="text"/>
 		</div>
+		
 		<div>
 			<input type="submit" value="salva"/>
-		</div>
+		</div>	
+	</form>
 		
+<<<<<<< HEAD
 	</form>	
 
+=======
+	<form th:action="@{formAutore}" method="post">
+		<div><input type="submit" value="crea nuovo autore"/></div>
+	</form>
+	
+>>>>>>> branch 'master' of https://github.com/AchilleLP/ProgettoSIW.git
 </body>
 
 </html>

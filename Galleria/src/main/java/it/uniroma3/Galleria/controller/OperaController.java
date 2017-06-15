@@ -1,6 +1,9 @@
 package it.uniroma3.Galleria.controller;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/AchilleLP/ProgettoSIW.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+<<<<<<< HEAD
 
+=======
+import it.uniroma3.Galleria.model.Autore;
+>>>>>>> branch 'master' of https://github.com/AchilleLP/ProgettoSIW.git
 import it.uniroma3.Galleria.model.Opera;
 import it.uniroma3.Galleria.service.OperaService;
 
@@ -34,9 +41,19 @@ public class OperaController {
 	
 	
 	@RequestMapping(value="/opere",method=RequestMethod.POST)
-	public String addOpera(@ModelAttribute Opera opera){
-		operaService.add(opera);
-		return "redirect:/index.html";
+	public String addOpera(@ModelAttribute Opera opera,Model model){
+		String nextPage;
+		
+		if(opera.getAutore() == null){
+			model.addAttribute("autore", new Autore());
+			nextPage="formAutore";
+		}
+		else{
+			operaService.add(opera);
+			nextPage="redirect:/index.html";
+		}
+
+		return nextPage;
 	}
 	
 	//metodo per modificare un opera inserita
@@ -52,5 +69,8 @@ public class OperaController {
 		operaService.delete(id);
 		return "redirect:/index.html";
 	}
+	
+
+	
 
 }

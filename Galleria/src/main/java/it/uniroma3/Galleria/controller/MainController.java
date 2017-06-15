@@ -1,16 +1,28 @@
 package it.uniroma3.Galleria.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.uniroma3.Galleria.model.Amministratore;
+<<<<<<< HEAD
+=======
+import it.uniroma3.Galleria.model.Autore;
+import it.uniroma3.Galleria.model.Opera;
+import it.uniroma3.Galleria.service.AutoreSevice;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+>>>>>>> branch 'master' of https://github.com/AchilleLP/ProgettoSIW.git
 import it.uniroma3.Galleria.model.Opera;
 
 @Controller
 public class MainController {
 	
+	 @Autowired
+	 private AutoreSevice autoreService;
 	
 	 // Login form
 	  @GetMapping("/login")
@@ -44,7 +56,7 @@ public class MainController {
 	  // Inserisci Opera
 	  @RequestMapping("/formOpera")
 	  public String formOpera(Model model) {
-
+		model.addAttribute("autori",this.autoreService.findAll());
 		model.addAttribute("opera", new Opera());
 	    return "formOpera";
 	  }
@@ -54,6 +66,5 @@ public class MainController {
 		  model.addAttribute("admin", new Amministratore());
 		  return "formAmministratore";
 	  }
-	  
 	  
 }
