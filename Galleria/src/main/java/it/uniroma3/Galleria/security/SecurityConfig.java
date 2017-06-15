@@ -32,8 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		.passwordEncoder(passwordEncoder())
 		.usersByUsernameQuery("SELECT nickname,password,1 FROM Amministratore WHERE nickname=?")
-		.authoritiesByUsernameQuery("SELECT nickname,role FROM Amministratore WHERE nickname=?")
-		.and().inMemoryAuthentication().withUser("Mario").password("123").roles("ADMIN");
+		.authoritiesByUsernameQuery("SELECT nickname,role FROM Amministratore WHERE nickname=?");
 		
 	}
  

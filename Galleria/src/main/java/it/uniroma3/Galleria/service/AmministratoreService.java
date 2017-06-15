@@ -44,4 +44,9 @@ public class AmministratoreService {
 		return amministratori;
 	}
 	
+	
+	@Transactional
+	public void delete(Long id){
+		this.amministratoreRepository.delete(id);
+	}
 }

@@ -17,12 +17,12 @@ public class MainController {
 	  public String login(Model model) {
 	    return "login";
 	  }
-	  
+	  	  
 	  //index
-	  @GetMapping("/")
+	  @RequestMapping("/")
 	  public String getIndex(Model model) {
 		  model.addAttribute("autenticato", true);
-	    return "redirect:/index.html";
+	    return "redirect:index.html";
 	  }
 	  
 	  // Login form with error
