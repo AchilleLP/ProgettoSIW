@@ -4,13 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import it.uniroma3.Galleria.model.Amministratore;
-import it.uniroma3.Galleria.model.Opera;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import it.uniroma3.Galleria.model.Opera;
 
 @Controller
@@ -36,6 +31,15 @@ public class MainController {
 	    model.addAttribute("loginError", true);
 	    return "login";
 	  }
+	  
+	  
+	  //logout
+	  @RequestMapping("/logout")
+	  public String logout(Model model) {
+	    model.addAttribute("logout", true);
+	    return "logout";
+	  }
+	  
 	  
 	  // Inserisci Opera
 	  @RequestMapping("/formOpera")

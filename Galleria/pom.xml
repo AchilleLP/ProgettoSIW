@@ -62,6 +62,14 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- marked the embedded servlet container as provided -->
+		
+		<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity3 -->
+<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
+<dependency>
+    <groupId>org.thymeleaf.extras</groupId>
+    <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+    </dependency>
+
 	
 	</dependencies>
 	
