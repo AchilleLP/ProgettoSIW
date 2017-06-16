@@ -22,8 +22,17 @@ public class OperaController {
 	@RequestMapping("/opere")
 	public String getOpere(Model model){
 		model.addAttribute("opere",operaService.findAll());
+		model.addAttribute("user",true);
 		return "mostraOpere";
 	}
+	
+	@RequestMapping("/opereadmin")
+	public String getOpereAdmin(Model model){
+		model.addAttribute("opere",operaService.findAll());
+		model.addAttribute("admin", true);
+		return "mostraOpere";
+	}
+	
 	
 	@RequestMapping("/opere/{id}")
 	//per collegare {id} con id del metodo basta aggiungere @PathVariable
@@ -61,9 +70,10 @@ public class OperaController {
 	
 	//metodo per cancellare opera
 	@RequestMapping(value="/opere/{id}",method=RequestMethod.DELETE)
-	public String deleteOpera(@PathVariable Long id){
+	public String deleteOpera(@PathVariable Long id, Model model){
 		operaService.delete(id);
-		return "redirect:/index.html";
+		model.addAttribute("delete", true);
+		return "adminPage";
 	}
 	
 

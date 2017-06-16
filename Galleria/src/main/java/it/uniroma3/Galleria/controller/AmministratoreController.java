@@ -17,9 +17,10 @@ public class AmministratoreController {
 	private AmministratoreService amministratoreService;
 	
 	@RequestMapping(value="/admin",method=RequestMethod.POST)
-	public String addAdmin(@ModelAttribute Amministratore admin){
+	public String addAdmin(@ModelAttribute Amministratore admin, Model model){
 		amministratoreService.addAmministratore(admin);
-		return "redirect:/index.html";
+		model.addAttribute("newadmin", true);
+		return "adminPage";
 	}
 	@RequestMapping("/admin")
 	public String getAdmin(Model model){
