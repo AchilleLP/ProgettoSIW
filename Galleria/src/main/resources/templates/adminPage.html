@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Admin Page</title>
+</head>
+<body>
+<p><a href="opere">Opere</a></p>
+	<p><a href="formAmministratore">Registra nuovo admin</a></p>
+	<p><a href="admin">Amministratori</a></p>
+	<p><a href="formOpera">Inserisci opera</a></p>
+	<p><a href="logout">LogOut</a></p>
+	
+	
+	<div th:if="${inserita}">Opera Inserita Correttamente</div>
+</body>
+</html>

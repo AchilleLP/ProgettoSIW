@@ -45,7 +45,8 @@ public class OperaController {
 		}
 		else{
 			operaService.add(opera);
-			nextPage="redirect:/index.html";
+			nextPage="/adminPage";
+			model.addAttribute("inserita",true);
 		}
 
 		return nextPage;

@@ -22,6 +22,12 @@ public class MainController {
 	  public String login(Model model) {
 	    return "login";
 	  }
+	  
+	  // Login form
+	  @RequestMapping("/adminPage")
+	  public String joinAdmin(Model model) {
+	    return "adminPage";
+	  }
 	  	  
 	  //index
 	  @RequestMapping("/")
