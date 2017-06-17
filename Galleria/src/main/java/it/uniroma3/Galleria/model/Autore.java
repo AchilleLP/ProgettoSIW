@@ -122,6 +122,12 @@ public class Autore {
 			return false;
 		return true;
 	}
+	public Map<String, Opera> getOpere() {
+		return opere;
+	}
+	public void setOpere(Map<String, Opera> opere) {
+		this.opere = opere;
+	}
 
 	
 	/*public Autore(){

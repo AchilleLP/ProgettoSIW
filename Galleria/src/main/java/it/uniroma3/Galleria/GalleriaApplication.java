@@ -3,6 +3,8 @@ package it.uniroma3.Galleria;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import it.uniroma3.Galleria.service.OperaService;
+
 @SpringBootApplication
 public class GalleriaApplication {
 
@@ -10,3 +12,4 @@ public class GalleriaApplication {
 		SpringApplication.run(GalleriaApplication.class, args);
 	}
 }
+

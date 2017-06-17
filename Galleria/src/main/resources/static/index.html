@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security4
+">
 <head>
 <title>Galleria Web</title>
 </head>
 <body>
 	<h1>Home</h1>
-	<p><a href="login"> Esegui Login</a></p>
+	
 	<p><a href="opere">Opere</a></p>
-	<p><a href="formAmministratore">Registra nuovo admin</a></p>
-	<p><a href="admin">Amministratori</a></p>
-	<p><a href="formOpera">inserisci opera</a></p>
-	<div th:if="${#authorization.expression}">
-	<a href="logout">LogOut</a></sec:authorize></div>
+	<p th:text="${autenticato}"></p>
+	<p><a href="login"> Esegui Login</a></p>
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<p><a href="formAmministratore">Registra nuovo admin</a></p>
+		<p><a href="admin">Amministratori</a></p>
+		<p><a href="formOpera">inserisci opera</a></p>
+		<a href="logout">LogOut</a></sec:authorize>
+	</div>
+		
+	
  	
 
 </body>

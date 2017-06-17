@@ -44,5 +44,10 @@ public class OperaService {
 		public void update(Long id,Opera opera){
 			this.operaRepository.save(opera);
 		}
+		
+		@Transactional
+		public List<Opera> findByTitolo(String titolo){
+			return this.operaRepository.findByTitolo(titolo);
+		}
 }
 

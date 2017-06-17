@@ -7,6 +7,10 @@
 <body>
 	<h1>Lista opere</h1>
 	
+	<form th:action="@{opere}" method="get" th:object="${operaRicercata}">
+		<input th:field="*{titolo}" type="text"/>
+		<input type="submit" value="Cerca"/>
+	</form>
 	<div th:each="opera : ${opere}">
 		<a th:href="@{opere/}+${opera.id}" th:text="${opera.titolo}">Titolo</a>
 		<form th:action="@{opere/}+${opera.id}" th:method="delete">
@@ -14,6 +18,5 @@
 		</form>
 	</div>
 	<p><a href="/">Torna alla Home</a></p>
-	<div th:if="${autenticato}"><a href="logout">LogOut</a></div>
 </body>
 </html>

@@ -21,6 +21,7 @@ public class OperaController {
 	
 	@RequestMapping("/opere")
 	public String getOpere(Model model){
+		model.addAttribute("operaRicercata",new Opera());
 		model.addAttribute("opere",operaService.findAll());
 		return "mostraOpere";
 	}
@@ -65,6 +66,13 @@ public class OperaController {
 		return "redirect:/index.html";
 	}
 	
+	@RequestMapping(value = "/opere",method=RequestMethod.GET)
+	public String ricerca(@ModelAttribute Opera operaRicercata,Model model){
+		String titolo = operaRicercata.getTitolo();
+		model.addAttribute("operaRicercata",new Opera());
+		model.addAttribute("opere",this.operaService.findByTitolo(titolo));
+		return "mostraOpere";
+	}	
 
 	
 

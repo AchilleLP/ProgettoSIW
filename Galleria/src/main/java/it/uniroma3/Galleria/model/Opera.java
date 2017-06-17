@@ -70,5 +70,8 @@ public class Opera {
 	public void setDimensione(String dimensione) {
 		this.dimensione = dimensione;
 	}
-
+	
+	
+	
+	
 }
