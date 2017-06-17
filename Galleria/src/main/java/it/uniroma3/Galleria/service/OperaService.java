@@ -47,7 +47,29 @@ public class OperaService {
 		
 		@Transactional
 		public List<Opera> findByTitolo(String titolo){
-			return this.operaRepository.findByTitolo(titolo);
+			return this.operaRepository.findByTitoloContainingIgnoreCase(titolo);
 		}
+		
+		@Transactional
+		public List<Opera> findByDataRealizzazione(int anno){
+			return this.operaRepository.findByDataRealizzazione(anno);
+		}
+		
+		@Transactional
+		public List<Opera> findByAutoreNome(String nome){
+			return this.operaRepository.findByAutoreNomeIgnoreCase(nome);
+		}
+		
+		@Transactional
+		public List<Opera> findByAutoreCognome(String cognome){
+			return this.operaRepository.findByAutoreCognomeIgnoreCase(cognome);
+		}
+	
+		@Transactional
+		public List<Opera> findByAutoreId(Long id){
+			return this.operaRepository.findByAutoreId(id);
+		}
+		
+		
 }
 

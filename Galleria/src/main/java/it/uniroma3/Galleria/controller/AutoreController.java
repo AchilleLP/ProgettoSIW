@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.Galleria.model.Autore;
 import it.uniroma3.Galleria.model.Opera;
-import it.uniroma3.Galleria.service.AutoreSevice;
+import it.uniroma3.Galleria.service.AutoreService;
 
 @Controller
 public class AutoreController {
 	@Autowired 
-	private AutoreSevice autoreService;
+	private AutoreService autoreService;
 	
 	@RequestMapping(value="/opere/nuovoAutore",method=RequestMethod.POST)
 	public String addAutore(@ModelAttribute Autore autore,Model model){
@@ -31,7 +31,7 @@ public class AutoreController {
 		return "formAutore";
 	}
 	
-	@RequestMapping("/autore/{id}")
+	@RequestMapping("opere/autore/{id}")
 	public String getAutore(@PathVariable Long id,Model model){
 		model.addAttribute("autore",this.autoreService.findbyId(id));
 		return "autore";

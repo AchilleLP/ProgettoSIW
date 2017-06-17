@@ -1,6 +1,7 @@
 package it.uniroma3.Galleria.model;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Entity;
@@ -25,8 +26,8 @@ public class Autore {
 	private Date dataNascita;
 	@Temporal(TemporalType.DATE)
 	private Date dataMorte;
-	@OneToMany(mappedBy="autore")
-	private Map<String,Opera> opere;
+
+	
 	public String getNome() {
 		return nome;
 	}
@@ -73,7 +74,6 @@ public class Autore {
 		result = prime * result + ((dataNascita == null) ? 0 : dataNascita.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((opere == null) ? 0 : opere.hashCode());
 		return result;
 	}
 	@Override
@@ -115,32 +115,10 @@ public class Autore {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (opere == null) {
-			if (other.opere != null)
-				return false;
-		} else if (!opere.equals(other.opere))
-			return false;
+		
 		return true;
 	}
-	public Map<String, Opera> getOpere() {
-		return opere;
-	}
-	public void setOpere(Map<String, Opera> opere) {
-		this.opere = opere;
-	}
-
 	
-	/*public Autore(){
-		this.opere = new HashMap<>();
-	}
-	public void addOpera(Opera o){
-		if(o!=null)
-			opere.put(o.getTitolo(),o);
-	}
-	public Opera getOpera(String titolo){
-		if(titolo!=null)
-			return opere.get(titolo);
-		return null;
-	}*/
+
 	
 }

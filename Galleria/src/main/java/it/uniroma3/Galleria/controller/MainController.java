@@ -9,18 +9,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import it.uniroma3.Galleria.model.Amministratore;
 
 import it.uniroma3.Galleria.model.Opera;
-import it.uniroma3.Galleria.service.AutoreSevice;
+import it.uniroma3.Galleria.service.AutoreService;
 
 @Controller
 public class MainController {
 	
 	 @Autowired
-	 private AutoreSevice autoreService;
+	 private AutoreService autoreService;
 	
 	 // Login form
 	  @GetMapping("/login")
 	  public String login(Model model) {
 	    return "login";
+	  }
+	  
+	  // Login form
+	  @RequestMapping("/adminPage")
+	  public String joinAdmin(Model model) {
+	    return "adminPage";
 	  }
 	  	  
 	  //index

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<title>Risultati ricerca</title>
+</head>
+<body>
+	<h1>Risultati ricerca per "<span th:text="${ricerca}"> </span>"</h1>
+	<div th:if="${opere.empty}">Nessun opera trovata</div>
+	<div th:each="opera : ${opere}">
+		<a th:href="@{opere/}+${opera.id}" th:text="${opera.titolo}">Titolo</a>
+	</div>
+	<a href="opere">Torna alla lista completa delle opere</a>
+</body>
+</html>

@@ -10,7 +10,6 @@
 	<form th:action="@{opere}" th:object="${opera}" method="post">
 		<div>
 		<select th:field="*{autore}">
-  			<option selected="selected" value="">Autore non presente</option>
  		 	<option th:each="aut : ${autori}" th:value="${aut.id}" th:text="${aut.nome}"></option>
 		</select>
 		</div>
@@ -32,7 +31,7 @@
 		</div>	
 	</form>
 		
-	<form th:action="@{formAutore}" method="post">
+	<form th:action="@{formAutore}">
 		<div><input type="submit" value="crea nuovo autore"/></div>
 	</form>
 	

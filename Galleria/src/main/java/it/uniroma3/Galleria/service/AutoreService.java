@@ -14,7 +14,7 @@ import it.uniroma3.Galleria.repository.AutoreRepository;
 
 
 @Service
-public class AutoreSevice {
+public class AutoreService {
 	@Autowired
     private AutoreRepository autoreRepository; 
 
@@ -37,6 +37,18 @@ public class AutoreSevice {
 	@Transactional
 	public void delete(Long id){
 		this.autoreRepository.delete(id);
+	}
+	@Transactional
+	public List<Autore> findByNome(String nome){
+		return this.autoreRepository.findByNomeIgnoreCase(nome);
+	}
+	@Transactional
+	public List<Autore> findByCognome(String cognome){
+		return this.autoreRepository.findByCognomeIgnoreCase(cognome);
+	}
+	@Transactional
+	public Autore findByNomeCognome(String nome,String cognome){
+		return this.autoreRepository.findByNomeAndCognomeIgnoreCase(nome, cognome);
 	}
 
 }

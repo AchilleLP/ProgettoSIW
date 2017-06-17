@@ -7,16 +7,26 @@
 <body>
 	<h1>Lista opere</h1>
 	
-	<form th:action="@{opere}" method="get" th:object="${operaRicercata}">
-		<input th:field="*{titolo}" type="text"/>
-		<input type="submit" value="Cerca"/>
-	</form>
-	<div th:each="opera : ${opere}">
-		<a th:href="@{opere/}+${opera.id}" th:text="${opera.titolo}">Titolo</a>
-		<form th:action="@{opere/}+${opera.id}" th:method="delete">
-			<input type="submit" value="cancella"/>
+	<div th:if="${user}">
+		<form th:action="@{ricercaOpere}">
+			<select name="tipoRicerca">
+				<option value="operaTitolo">Per nome</option>
+				<option value="operaAnno">Per anno</option>
+				<option value="autore">Per autore</option>
+			</select>
+			<input type="text"  th:name="ricerca"/>
+			<input type="submit" value="Cerca"/>
 		</form>
 	</div>
-	<p><a href="/">Torna alla Home</a></p>
+	
+	<div th:each="opera : ${opere}">
+		<b>Titolo:<a th:href="@{opere/}+${opera.id}" th:text="${opera.titolo}"></a></b>
+		<form th:action="@{opere/}+${opera.id}" th:method="delete">
+			<div th:if="${admin}"><input type="submit" value="cancella"/></div>
+		</form>
+	</div>
+	
+	<div th:if="${admin}"><p><a href="/adminPage">Torna All'Area Admin</a></p></div>
+	<div th:if="${user}"><p><a href="/">Torna Alla Home</a></p></div>
 </body>
 </html>

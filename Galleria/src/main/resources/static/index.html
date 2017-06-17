@@ -8,16 +8,7 @@
 	<h1>Home</h1>
 	
 	<p><a href="opere">Opere</a></p>
-	<p th:text="${autenticato}"></p>
-	<p><a href="login"> Esegui Login</a></p>
-	<div sec:authorize="hasRole('ROLE_ADMIN')">
-		<p><a href="formAmministratore">Registra nuovo admin</a></p>
-		<p><a href="admin">Amministratori</a></p>
-		<p><a href="formOpera">inserisci opera</a></p>
-		<a href="logout">LogOut</a></sec:authorize>
-	</div>
-		
-	
+	<p><a href="login">Login</a></p>
  	
 
 </body>

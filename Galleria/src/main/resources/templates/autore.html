@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
-<title>Insert title here</title>
+<title>Autore</title>
 </head>
 <body>
-	<h1 th:text="${autore.nome}"></h1>
-	<p th:text="${autore.cognome}"></p>
+	<h1>Autore</h1>
+	<p><b>Nome:</b><span th:text="${autore.nome}"></span></p>
+	<p><b>Cognome:</b><span th:text="${autore.cognome}"></span></p>
 </body>
 </html>

@@ -41,11 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
         .authorizeRequests()
-            .antMatchers("/formOpera","/formAmministratore","/admin").authenticated()
+            .antMatchers("/formOpera","/formAmministratore","/admin","/adminPage").authenticated()
             .anyRequest().permitAll()
             .and()
         .formLogin()
-     .loginPage("/login").defaultSuccessUrl("/")
+     .loginPage("/login").defaultSuccessUrl("/adminPage")
             .usernameParameter("nickname").passwordParameter("password")
             .permitAll()
             .and()

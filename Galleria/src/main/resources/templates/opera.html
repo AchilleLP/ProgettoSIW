@@ -8,10 +8,10 @@
 	
 		<h1 th:text="${opera.titolo}">Titolo</h1>
 		
-		<p th:text="${opera.tecnica}">Tecnica</p>
-		<p th:text="${opera.dimensione}">Dimensione</p>
-		<p th:text="${opera.dataRealizzazione}">Anno di realizzazione</p>
-		<a th:href="@{autore/}+${opera.autore.id}" th:text="${opera.autore.nome}"></a>
+		<p><b>Tecnica:</b><span th:text="${opera.tecnica}"></span></p>
+		<p><b>Dimensione:</b><span th:text="${opera.dimensione}"></span></p>
+		<p><b>Anno di realizzazione:</b><span th:text="${opera.dataRealizzazione}"></span></p>
+		<p><b>Autore:</b><a th:href="@{autore/}+${opera.autore.id}" th:text="${opera.autore.nome}"></a></p>
 			
 </body>
 </html>
