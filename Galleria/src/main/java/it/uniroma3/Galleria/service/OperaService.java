@@ -70,6 +70,11 @@ public class OperaService {
 			return this.operaRepository.findByAutoreId(id);
 		}
 		
+		@Transactional
+		public List<Opera> removeByAutoreId(Long id){
+			return this.operaRepository.removeByAutoreId(id);
+		}
+		
 		
 }
 

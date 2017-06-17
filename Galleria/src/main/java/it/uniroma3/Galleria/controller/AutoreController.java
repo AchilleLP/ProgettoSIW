@@ -34,8 +34,14 @@ public class AutoreController {
 	@RequestMapping("opere/autore/{id}")
 	public String getAutore(@PathVariable Long id,Model model){
 		model.addAttribute("autore",this.autoreService.findbyId(id));
-		return "autore";
-		
+		return "autore";	
 	}
+	@RequestMapping("/autoriAdmin")
+	public String getAutori(Model model){
+		model.addAttribute("autori",this.autoreService.findAll());
+		return "mostraAutori";
+	}
+	
+	
 
 }

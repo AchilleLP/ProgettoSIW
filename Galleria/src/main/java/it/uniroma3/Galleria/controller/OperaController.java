@@ -146,6 +146,14 @@ public class OperaController {
 		}
 		catch(NumberFormatException e) { return false; }
 	}
+	
+	@RequestMapping(value="/autori/{id}",method=RequestMethod.DELETE)
+	public String deleteAutore(@PathVariable Long id, Model model){
+		this.operaService.removeByAutoreId(id);
+		this.autoreService.delete(id);
+		model.addAttribute("deleteAutore",true);
+		return "redirect:/adminPage.html";
+	}
 
 	
 

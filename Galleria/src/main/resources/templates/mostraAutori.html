@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+
+<title>Autori</title>
+</head>
+<body>
+	<h1>Autori:</h1>
+	<div th:each="autore : ${autori}">
+		<b><a th:href="@{opere/autore/}+${autore.id}" th:text="${autore.nome}"></a></b>
+		<form th:action="@{autori/}+${autore.id}" th:method="delete">
+			<div><input type="submit" value="cancella"/></div>
+		</form>
+	</div>
+	
+	<div><form th:action="@{formAutore}">
+		<div><input type="submit" value="crea nuovo autore"/></div>
+	</form></div>
+	<div><p><a href="/adminPage">Torna All'Area Admin</a></p></div>
+
+</body>
+</html>

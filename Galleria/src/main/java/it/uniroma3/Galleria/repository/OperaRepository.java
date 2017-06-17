@@ -15,5 +15,6 @@ public interface OperaRepository extends CrudRepository<Opera,Long> {
 	List<Opera> findByAutoreNomeIgnoreCase(String nome);
 	List<Opera> findByAutoreCognomeIgnoreCase(String cognome);
 	List<Opera> findByAutoreId(Long id);
+	List<Opera> removeByAutoreId(Long id);
 
 }
