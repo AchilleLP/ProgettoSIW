@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
-
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
 <title>Opere</title>
 </head>
 <body>
-	<h1>Lista opere</h1>
+
+	<div th:if="${admin}" th:include="barraNavigazioneAdmin :: barra"></div>	
 	
+	<div th:if="${user}" th:include="barraNavigazione :: barra"></div>
+		
+	
+	
+	<div class="container-fluid">
+		<h1>Lista opere</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Titolo</th>
+						<th>Tecnica</th>
+						<th>Dimensione</th>
+						<th>Anno di realizzazione</th>
+						<th>Autore</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="opera : ${opere}">
+						<td th:text="${opera.titolo}"></td>
+						<td th:text="${opera.tecnica}"></td>
+						<td th:text="${opera.dimensione}"></td>
+						<td th:text="${opera.dataRealizzazione}"></td>
+						
+						<td th:if="${user}">
+							<a th:href="@{autore(id=${opera.autore.id})}" th:text="${opera.autore.nome}"></a>
+						</td>
+						<td th:if="${admin}">
+							<a th:href="@{autoreAdmin(id=${opera.autore.id})}" th:text="${opera.autore.nome}"></a>
+						</td>
+						<td>
+							<form th:action="@{opera(id=${opera.id})}" th:method="delete">
+								<div th:if="${admin}"><input type="submit" value="cancella" class="btn"/></div>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
 	<div th:if="${user}">
 		<form th:action="@{ricercaOpere}">
 			<select name="tipoRicerca">
@@ -19,14 +59,5 @@
 		</form>
 	</div>
 	
-	<div th:each="opera : ${opere}">
-		<b>Titolo:<a th:href="@{opere/}+${opera.id}" th:text="${opera.titolo}"></a></b>
-		<form th:action="@{opere/}+${opera.id}" th:method="delete">
-			<div th:if="${admin}"><input type="submit" value="cancella"/></div>
-		</form>
-	</div>
-	
-	<div th:if="${admin}"><p><a href="/adminPage">Torna All'Area Admin</a></p></div>
-	<div th:if="${user}"><p><a href="/">Torna Alla Home</a></p></div>
 </body>
 </html>

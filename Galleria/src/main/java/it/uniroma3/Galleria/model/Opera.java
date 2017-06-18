@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import it.uniroma3.Galleria.model.Autore;
 
@@ -14,11 +15,16 @@ public class Opera {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	@NotNull
 	private String titolo;
+	@NotNull
 	private String tecnica;
+	@NotNull
 	private int dataRealizzazione;
+	@NotNull
 	@ManyToOne
 	private Autore autore;
+	@NotNull
 	private String dimensione;
 	
 	public Opera(){}

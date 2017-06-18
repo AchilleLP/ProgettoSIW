@@ -4,9 +4,12 @@ package it.uniroma3.Galleria.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,7 @@ public class OperaController {
 	@Autowired
 	private AutoreService autoreService;
 	
+	//metodo per ottenere tutte le opere da utente generico
 	@RequestMapping("/opere")
 	public String getOpere(Model model){
 		model.addAttribute("opere",operaService.findAll());
@@ -33,6 +37,7 @@ public class OperaController {
 		return "mostraOpere";
 	}
 	
+	//metodo per ottenere tutte le opere da amministratore
 	@RequestMapping("/opereadmin")
 	public String getOpereAdmin(Model model){
 		model.addAttribute("opere",operaService.findAll());
@@ -40,24 +45,14 @@ public class OperaController {
 		return "mostraOpere";
 	}
 	
-	
-	@RequestMapping("/opere/{id}")
-	//per collegare {id} con id del metodo basta aggiungere @PathVariable
-	//se il la variabile del metodo aveva un nome diverso era necessario aggiungere
-	//@PathVariable("id")
-	public String getOpera(@PathVariable Long id,Model model){
-		model.addAttribute("opera",operaService.findbyId(id));
-		return "opera";
-	}
-	
-	
+	//metodo per aggiungere opera
 	@RequestMapping(value="/opere",method=RequestMethod.POST)
-	public String addOpera(@ModelAttribute Opera opera,Model model){
+	public String addOpera(@Valid @ModelAttribute Opera opera,Model model, BindingResult result){
 		String nextPage;
 		
-		if(opera.getAutore() == null){
-			model.addAttribute("autore", new Autore());
-			nextPage="formAutore";
+		if(result.hasErrors()){
+			model.addAttribute("opera", opera);
+			nextPage="formOpera";
 		}
 		else{
 			operaService.add(opera);
@@ -69,20 +64,21 @@ public class OperaController {
 	}
 	
 	//metodo per modificare un opera inserita
-	@RequestMapping(value="/opere/{id}",method=RequestMethod.PUT)
-	public void updateOpera(@PathVariable Long id,Opera opera){
+	@RequestMapping(value="/opera{id}",method=RequestMethod.PUT)
+	public void updateOpera(@RequestParam Long id,Opera opera){
 		//Da implementare
 		//operaService.update(id, opera);
 	}
 	
 	//metodo per cancellare opera
-	@RequestMapping(value="/opere/{id}",method=RequestMethod.DELETE)
-	public String deleteOpera(@PathVariable Long id, Model model){
+	@RequestMapping(value="/opera{id}",method=RequestMethod.DELETE)
+	public String deleteOpera(@RequestParam Long id, Model model){
 		operaService.delete(id);
 		model.addAttribute("delete", true);
 		return "adminPage";
 	}
 	
+	//metodo per ricercare opera in base a titolo/anno/nome o cognome autore
 	@RequestMapping(value = "/ricercaOpere")
 	public String ricerca(@RequestParam("tipoRicerca") String tipoRicerca,@RequestParam ("ricerca") String ricerca,Model model){
 		List<Opera> opere;
@@ -90,14 +86,8 @@ public class OperaController {
 			case "autore" :
 				if(elaboraRicerca(ricerca).equals("autoreNome"))		
 					opere = this.operaService.findByAutoreNome(ricerca);
-				else // if(elaboraRicerca(ricerca).equals("autoreCognome"))
+				else
 					opere = this.operaService.findByAutoreCognome(ricerca);
-				/*else{
-					if(elaboraRicercaNomeCognome(ricerca)>-1)
-						opere = this.operaService.findByAutoreId(elaboraRicercaNomeCognome(ricerca));
-					else 
-						opere = new ArrayList<>();		
-				}*/	
 				break;
 			case "operaTitolo" : opere = this.operaService.findByTitolo(ricerca);
 				break;
@@ -147,8 +137,9 @@ public class OperaController {
 		catch(NumberFormatException e) { return false; }
 	}
 	
-	@RequestMapping(value="/autori/{id}",method=RequestMethod.DELETE)
-	public String deleteAutore(@PathVariable Long id, Model model){
+	//metodo per eliminare autore
+	@RequestMapping(value="/autore{id}",method=RequestMethod.DELETE)
+	public String deleteAutore(@RequestParam Long id, Model model){
 		this.operaService.removeByAutoreId(id);
 		this.autoreService.delete(id);
 		model.addAttribute("deleteAutore",true);

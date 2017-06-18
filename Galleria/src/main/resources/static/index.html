@@ -2,18 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security4">
 <head>
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<style type="text/css" media="screen">
+ 
+    body {
+      background: url(background.jpg);
+    background-size: 1366px 768px;
+    background-repeat: no-repeat;
+    }
+ 
+ </style>
 <title>Galleria Web</title>
 </head>
-<body>
-	<div class="container-fluid">
+<body >
+	
+
+	
+		<div class="container-fluid">
 		<div class="navbar navbar-inverse">
 		
+			<!-- Logo -->
+			<div class="navabr-header">
+				<a href="/" class="navbar-brand">GALLERIA</a>
+			</div>
+			
+			<!-- Voci menu -->
+			<div>
+				<ul class="nav navbar-nav">
+					<li><a href="opere">Opere</a></li>
+					<li><a href="login">Login</a></li>
+				</ul>
+			
+			</div>
+			
 		</div>
 
-		<p><a href="opere">Opere</a></p>
-		<p><a href="login">Login</a></p>
+		
 	
 	</div>
+
 </body>
 </html>

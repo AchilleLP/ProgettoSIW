@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,9 +22,13 @@ public class Autore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@NotNull
 	private String nome;
+	@NotNull
 	private String cognome;
+	@NotNull
 	private String nazionalita;
+	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataNascita;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

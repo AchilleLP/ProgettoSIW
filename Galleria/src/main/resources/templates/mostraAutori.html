@@ -1,22 +1,44 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
-
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
 <title>Autori</title>
 </head>
 <body>
-	<h1>Autori:</h1>
-	<div th:each="autore : ${autori}">
-		<b><a th:href="@{opere/autore/}+${autore.id}" th:text="${autore.nome}"></a></b>
-		<form th:action="@{autori/}+${autore.id}" th:method="delete">
-			<div><input type="submit" value="cancella"/></div>
-		</form>
-	</div>
-	
-	<div><form th:action="@{formAutore}">
-		<div><input type="submit" value="crea nuovo autore"/></div>
-	</form></div>
-	<div><p><a href="/adminPage">Torna All'Area Admin</a></p></div>
+
+	<div th:include="barraNavigazioneAdmin :: barra"></div>
+	<div class="container-fluid">
+		<h1>Lista opere</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Cognome</th>
+						<th>Nazionalita</th>
+						<th>Data nascita</th>
+						<th>Data morte</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="autore : ${autori}">
+						<td th:text="${autore.nome}"></td>
+						<td th:text="${autore.cognome}"></td>
+						<td th:text="${autore.nazionalita}"></td>
+						<td th:text="${autore.dataNascita}"></td>
+						<td th:text="${autore.dataMorte}"></td>
+						<td>
+							<form th:action="@{autore(id=${autore.id})}" th:method="delete">
+								<div><input type="submit" value="cancella" class="btn"/></div>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<form th:action="@{formAutore}">
+					<div><input type="submit" value="crea nuovo autore" class="btn"/></div>
+			</form>
+		</div>
 
 </body>
 </html>

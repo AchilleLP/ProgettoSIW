@@ -32,7 +32,7 @@ public class MainController {
 	  //index
 	  @RequestMapping("/")
 	  public String getIndex(Model model) {
-		  model.addAttribute("autenticato", "autenticato");
+		model.addAttribute("autenticato", "autenticato");
 	    return "redirect:index.html";
 	  }
 	  

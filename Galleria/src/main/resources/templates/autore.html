@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
 <title>Autore</title>
 </head>
 <body>
+	<div th:if="${admin}" th:include="barraNavigazioneAdmin :: barra"></div>	
+	
+	<div th:if="${user}" th:include="barraNavigazione :: barra"></div>
+	
 	<h1>Autore</h1>
 	<p><b>Nome:</b><span th:text="${autore.nome}"></span></p>
 	<p><b>Cognome:</b><span th:text="${autore.cognome}"></span></p>

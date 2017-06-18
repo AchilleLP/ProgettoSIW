@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
-
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
 <title>Insert title here</title>
 </head>
 <body>
+	<div th:include="barraNavigazioneAdmin :: barra"></div>
+	<div class="container">
+		<h2>Inserisci un nuovo autore</h2>
+		<form th:action="@{nuovoAutore}" th:method="post" th:object="${autore}">
+			<div class="form-group">
+				<label>Nome</label> 
+				<input th:field="*{nome}" type="text" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>Cognome</label> 
+				<input th:field="*{cognome}"  type="text" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>Nazionalita</label> 
+				<input th:field="*{nazionalita}"  type="text" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>Data di nascita</label> 
+				<input th:field="*{dataNascita}" type="date" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>Data morte</label> 
+				<input th:field="*{dataMorte}" type="date" class="form-control"/>
+			</div>
+			<div class="form-group"> 
+				<input value="registra" class="btn bt-default" type="submit"/>
+			</div>
+			
+		</form>
+	</div>
 
-
-	
-	<form th:action="@{opere/nuovoAutore}" th:method="post" th:object="${autore}">
-		<div>
-			<label>Nome</label> <input th:field="*{nome}" type="text"/>
-		</div>
-		
-		<div>
-			<label>Cognome</label> <input th:field="*{cognome}" type="text"/>
-		</div>
-		
-		<div>
-			<label>Nazionalita</label> <input th:field="*{nazionalita}" type="text"/>
-		</div>
-		
-		<div>
-			<label>Data nascita</label> <input th:field="*{dataNascita}" type="date"/>
-		</div>
-	
-		<div>
-			<label>Data morte</label> <input th:field="*{dataMorte}" type="date"/>
-		</div>
-	
-		<div>
-			<input type="submit" value="registra"/>
-		</div>
-		
-	</form>
 
 </body>
 </html>

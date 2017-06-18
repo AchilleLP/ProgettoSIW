@@ -3,6 +3,7 @@ package it.uniroma3.Galleria.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,11 @@ public class AmministratoreController {
 	private AmministratoreService amministratoreService;
 	
 	@RequestMapping(value="/admin",method=RequestMethod.POST)
-	public String addAdmin(@ModelAttribute Amministratore admin, Model model){
+	public String addAdmin(@Valid @ModelAttribute Amministratore admin, Model model,BindingResult result){
+		if(result.hasErrors()){
+			model.addAttribute("admin",admin);
+			return "formAmministratore";
+		}
 		amministratoreService.addAmministratore(admin);
 		model.addAttribute("newadmin", true);
 		return "adminPage";
