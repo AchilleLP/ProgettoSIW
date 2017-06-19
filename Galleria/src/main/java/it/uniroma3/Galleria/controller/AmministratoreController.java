@@ -20,18 +20,22 @@ public class AmministratoreController {
 	private AmministratoreService amministratoreService;
 	
 	@RequestMapping(value="/admin",method=RequestMethod.POST)
-	public String addAdmin(@Valid @ModelAttribute Amministratore admin, Model model,BindingResult result){
+	public String addAdmin(@Valid @ModelAttribute Amministratore admin,BindingResult result, Model model){
 		if(result.hasErrors()){
+			for(String field:result.getSuppressedFields()){
+				System.out.println(result.getRawFieldValue(field));
+			}
 			model.addAttribute("admin",admin);
-			return "formAmministratore";
+			return "mostraAmministratori";
 		}
 		amministratoreService.addAmministratore(admin);
 		model.addAttribute("newadmin", true);
-		return "adminPage";
+		return this.getAdmin(model);
 	}
 	@RequestMapping("/admin")
 	public String getAdmin(Model model){
 		model.addAttribute("amministratori", this.amministratoreService.findAll());
+		model.addAttribute("admin", new Amministratore());
 		return "mostraAmministratori";
 	}
 	

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,9 +44,19 @@ public class OperaController {
 		return "mostraOpere";
 	}
 	
+	  // Inserisci Opera
+	  @RequestMapping("/formOpera")
+	  public String formOpera(Model model) {
+		model.addAttribute("autori",this.autoreService.findAll());
+		if (!model.containsAttribute("opera"))
+			model.addAttribute("opera", new Opera());
+	    return "formOpera";
+	  }
+	
+	
 	//metodo per aggiungere opera
 	@RequestMapping(value="/opere",method=RequestMethod.POST)
-	public String addOpera(@Valid @ModelAttribute Opera opera,Model model, BindingResult result){
+	public String addOpera(@Valid @ModelAttribute Opera opera,BindingResult result, Model model){
 		String nextPage;
 		if(opera.getAutore()==null){
 			model.addAttribute("autore",new Autore());
@@ -56,7 +65,7 @@ public class OperaController {
 		}
 		else if(result.hasErrors()){
 			model.addAttribute("opera", opera);
-			nextPage="formOpera";
+			return this.formOpera(model);
 		}
 		else{
 			operaService.add(opera);

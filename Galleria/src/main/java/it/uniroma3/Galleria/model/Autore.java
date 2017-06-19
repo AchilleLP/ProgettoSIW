@@ -1,14 +1,12 @@
 package it.uniroma3.Galleria.model;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -29,8 +27,10 @@ public class Autore {
 	@NotNull
 	private String nazionalita;
 	@NotNull
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataNascita;
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataMorte;
 

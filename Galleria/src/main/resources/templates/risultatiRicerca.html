@@ -8,9 +8,32 @@
 	<div th:include="barraNavigazione :: barra"></div>
 	<h1>Risultati ricerca per "<span th:text="${ricerca}"> </span>"</h1>
 	<div th:if="${opere.empty}">Nessun opera trovata</div>
-	<div th:each="opera : ${opere}">
-		<a th:href="@{opera(id=${opera.id})}" th:text="${opera.titolo}">Titolo</a>
-	</div>
-	<a href="opere">Torna alla lista completa delle opere</a>
+	<div class="container-fluid">
+		<h1>Lista opere</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Titolo</th>
+						<th>Tecnica</th>
+						<th>Dimensione</th>
+						<th>Anno di realizzazione</th>
+						<th>Autore</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="opera : ${opere}">
+						<td th:text="${opera.titolo}"></td>
+						<td th:text="${opera.tecnica}"></td>
+						<td th:text="${opera.dimensione}"></td>
+						<td th:text="${opera.dataRealizzazione}"></td>
+						
+						<td>
+							<a th:href="@{autore(id=${opera.autore.id})}" th:text="${opera.autore.nome}"></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
 </body>
 </html>
