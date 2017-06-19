@@ -18,12 +18,13 @@ public class AutoreController {
 	@Autowired 
 	private AutoreService autoreService;
 	
+	//metodo per aggiungere autore
 	@RequestMapping(value="/nuovoAutore",method=RequestMethod.POST)
 	public String addAutore(@ModelAttribute Autore autore,Model model){
 		autoreService.add(autore);
-		model.addAttribute("autori",this.autoreService.findAll());
 		model.addAttribute("opera", new Opera());
-		return "redirect:/formOpera.html";
+		model.addAttribute("autori",this.autoreService.findAll());
+		return "formOpera";
 	}
 	
 	@RequestMapping("/formAutore")
@@ -32,6 +33,7 @@ public class AutoreController {
 		return "formAutore";
 	}
 	
+	//metodo per visualizzare autore da utenteGenerico
 	@RequestMapping("/autore{id}")
 	public String getAutore(@RequestParam Long id,Model model){
 		model.addAttribute("user",true);
@@ -39,6 +41,7 @@ public class AutoreController {
 		return "autore";	
 	}
 	
+	//metodo per visualizzare autore da admin
 	@RequestMapping("/autoreAdmin{id}")
 	public String getAutoreAdmin(@RequestParam Long id,Model model){
 		model.addAttribute("admin",true);
@@ -46,11 +49,14 @@ public class AutoreController {
 		return "autore";	
 	}
 	
+	//metodo per visualizzare tutti gli autori
 	@RequestMapping("/autoriAdmin")
 	public String getAutori(Model model){
 		model.addAttribute("autori",this.autoreService.findAll());
 		return "mostraAutori";
 	}
+	
+	//il metodo per cancellare autore è in operaController
 	
 	
 

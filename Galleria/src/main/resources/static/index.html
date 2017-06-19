@@ -7,40 +7,54 @@
 <style type="text/css" media="screen">
  
     body {
-      background: url(background.jpg);
-    background-size: 1366px 768px;
-    background-repeat: no-repeat;
+      	background: url(background.jpg);
+    	background-size: 1366px 768px;
+    	background-repeat: no-repeat;
     }
  
  </style>
 <title>Galleria Web</title>
 </head>
 <body >
-	
-
-	
-		<div class="container-fluid">
-		<div class="navbar navbar-inverse">
-		
-			<!-- Logo -->
-			<div class="navabr-header">
-				<a href="/" class="navbar-brand">GALLERIA</a>
+		<div class="navbar navbar-inverse">	
+			<div class="container-fluid">		
+				
+				<!-- Logo -->
+				<div class="navabr-header">
+					<a href="/" class="navbar-brand">GALLERIA</a>
+				</div>
+				
+				<!-- Voci menu -->
+				<div>	
+					<ul class="nav navbar-nav">
+						<li><a href="opere">Opere</a></li>
+						<li><a href="login">Login</a></li>	
+					</ul>
+					
+					
+					<ul class="nav navbar-right">
+						<li>
+						
+						<!--Ricerca Opere  -->
+						
+						<form class="navbar-form navbar-left" th:action="@{ricercaOpere}">
+        					<div class="form-group">
+         						<input type="text" class="form-control" placeholder="Cerca opera" name="ricerca"/>
+         						<select name="tipoRicerca" class="form-control">
+									<option value="operaTitolo">per nome</option>
+									<option value="operaAnno">per anno</option>
+									<option value="autore">per autore</option>
+								</select>
+        					</div>
+        					<button type="submit" class="btn btn-success" value="cerca">Cerca</button>
+        					
+      					</form>
+      					</li>
+      				</ul>					
+				</div>
 			</div>
-			
-			<!-- Voci menu -->
-			<div>
-				<ul class="nav navbar-nav">
-					<li><a href="opere">Opere</a></li>
-					<li><a href="login">Login</a></li>
-				</ul>
-			
-			</div>
-			
 		</div>
 
-		
-	
-	</div>
 
 </body>
 </html>

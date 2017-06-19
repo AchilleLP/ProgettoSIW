@@ -49,8 +49,12 @@ public class OperaController {
 	@RequestMapping(value="/opere",method=RequestMethod.POST)
 	public String addOpera(@Valid @ModelAttribute Opera opera,Model model, BindingResult result){
 		String nextPage;
-		
-		if(result.hasErrors()){
+		if(opera.getAutore()==null){
+			model.addAttribute("autore",new Autore());
+			model.addAttribute("opera", opera);
+			nextPage="formAutore";
+		}
+		else if(result.hasErrors()){
 			model.addAttribute("opera", opera);
 			nextPage="formOpera";
 		}
@@ -74,8 +78,7 @@ public class OperaController {
 	@RequestMapping(value="/opera{id}",method=RequestMethod.DELETE)
 	public String deleteOpera(@RequestParam Long id, Model model){
 		operaService.delete(id);
-		model.addAttribute("delete", true);
-		return "adminPage";
+		return this.getOpereAdmin(model);
 	}
 	
 	//metodo per ricercare opera in base a titolo/anno/nome o cognome autore
@@ -142,8 +145,8 @@ public class OperaController {
 	public String deleteAutore(@RequestParam Long id, Model model){
 		this.operaService.removeByAutoreId(id);
 		this.autoreService.delete(id);
-		model.addAttribute("deleteAutore",true);
-		return "redirect:/adminPage.html";
+		model.addAttribute("autori",autoreService.findAll());
+		return "mostraAutori";
 	}
 
 	

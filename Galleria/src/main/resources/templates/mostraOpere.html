@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="css/bootstrap.min.css"/>
-<title>Opere</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<title>Opere</title>
 </head>
 <body>
-
+	
+	
 	<div th:if="${admin}" th:include="barraNavigazioneAdmin :: barra"></div>	
-	
 	<div th:if="${user}" th:include="barraNavigazione :: barra"></div>
-		
 	
+		
 	
 	<div class="container-fluid">
 		<h1>Lista opere</h1>
@@ -47,17 +47,7 @@
 			</table>
 		</div>
 		
-	<div th:if="${user}">
-		<form th:action="@{ricercaOpere}">
-			<select name="tipoRicerca">
-				<option value="operaTitolo">Per nome</option>
-				<option value="operaAnno">Per anno</option>
-				<option value="autore">Per autore</option>
-			</select>
-			<input type="text"  th:name="ricerca"/>
-			<input type="submit" value="Cerca"/>
-		</form>
-	</div>
+	
 	
 </body>
 </html>

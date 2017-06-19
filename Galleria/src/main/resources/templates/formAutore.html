@@ -8,7 +8,7 @@
 	<div th:include="barraNavigazioneAdmin :: barra"></div>
 	<div class="container">
 		<h2>Inserisci un nuovo autore</h2>
-		<form th:action="@{nuovoAutore}" th:method="post" th:object="${autore}">
+		<form th:action="@{nuovoAutore(opera=${opera})}" th:method="post" th:object="${autore}">
 			<div class="form-group">
 				<label>Nome</label> 
 				<input th:field="*{nome}" type="text" class="form-control"/>

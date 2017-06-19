@@ -27,11 +27,13 @@
 				<input th:field="*{dimensione}" type="text" class="form-control"/>
 			</div>
 			<div class="form-group">
-				<select th:field="*{autore}">
-					<option value="">Autore non presente</option>
+				<label>Artista</label>
+				<select th:field="*{autore}" class="form-control" >
  		 			<option th:each="aut : ${autori}" th:value="${aut.id}" th:text="${aut.nome}"></option>
+ 		 			<option value="">Crea nuovo artista</option>
 				</select>
 			</div>
+
 			<div class="form-group"> 
 				<input value="salva" class="btn bt-default" type="submit"/>
 			</div>

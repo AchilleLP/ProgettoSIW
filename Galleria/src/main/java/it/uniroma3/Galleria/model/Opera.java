@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import it.uniroma3.Galleria.model.Autore;
 
 
@@ -15,13 +17,11 @@ public class Opera {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	@NotNull
+	@NotEmpty
 	private String titolo;
-	@NotNull
+	@NotEmpty
 	private String tecnica;
-	@NotNull
 	private int dataRealizzazione;
-	@NotNull
 	@ManyToOne
 	private Autore autore;
 	@NotNull
