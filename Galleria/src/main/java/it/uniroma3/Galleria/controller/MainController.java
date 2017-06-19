@@ -1,4 +1,4 @@
-package it.uniroma3.Galleria.controller;
+ package it.uniroma3.Galleria.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +14,6 @@ import it.uniroma3.Galleria.service.AutoreService;
 @Controller
 public class MainController {
 	
-	 @Autowired
-	 private AutoreService autoreService;
 	
 	 // Login form
 	  @GetMapping("/login")
@@ -52,13 +50,6 @@ public class MainController {
 	  }
 	  
 	  
-	  // Inserisci Opera
-	  @RequestMapping("/formOpera")
-	  public String formOpera(Model model) {
-		model.addAttribute("autori",this.autoreService.findAll());
-		model.addAttribute("opera", new Opera());
-	    return "formOpera";
-	  }
 	  
 	  @RequestMapping("/formAmministratore")
 	  public String formAmministratore(Model model){

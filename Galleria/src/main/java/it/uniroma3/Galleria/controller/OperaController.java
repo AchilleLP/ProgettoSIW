@@ -30,7 +30,7 @@ public class OperaController {
 	private AutoreService autoreService;
 	
 	//metodo per ottenere tutte le opere da utente generico
-	@RequestMapping("/opere")
+	@RequestMapping("/opere") 
 	public String getOpere(Model model){
 		model.addAttribute("opere",operaService.findAll());
 		model.addAttribute("user",true);
@@ -45,9 +45,18 @@ public class OperaController {
 		return "mostraOpere";
 	}
 	
+	  // indirizza al form dell opera
+	  @RequestMapping("/formOpera")
+	  public String formOpera(Model model) {
+		model.addAttribute("autori",this.autoreService.findAll());
+		if(!model.containsAttribute("opera"))
+			model.addAttribute("opera", new Opera());
+	    return "formOpera";
+	  }
+	
 	//metodo per aggiungere opera
 	@RequestMapping(value="/opere",method=RequestMethod.POST)
-	public String addOpera(@Valid @ModelAttribute Opera opera,Model model, BindingResult result){
+	public String addOpera(@Valid @ModelAttribute Opera opera, BindingResult result,Model model){
 		String nextPage;
 		if(opera.getAutore()==null){
 			model.addAttribute("autore",new Autore());
@@ -56,14 +65,14 @@ public class OperaController {
 		}
 		else if(result.hasErrors()){
 			model.addAttribute("opera", opera);
-			nextPage="formOpera";
+			return this.formOpera(model);
+			
 		}
 		else{
 			operaService.add(opera);
 			nextPage="/adminPage";
 			model.addAttribute("inserita",true);
 		}
-
 		return nextPage;
 	}
 	
