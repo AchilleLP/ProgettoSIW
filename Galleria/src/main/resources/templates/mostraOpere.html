@@ -14,6 +14,7 @@
 	
 	<div class="container-fluid">
 		<h1>Lista opere</h1>
+			<div th:if="${aggiunta}" class = "alert alert-success">Opera aggiunta correttamente</div>
 			<table class="table">
 				<thead>
 					<tr>
@@ -32,19 +33,26 @@
 						<td th:text="${opera.dataRealizzazione}"></td>
 						
 						<td th:if="${user}">
-							<a th:href="@{autore(id=${opera.autore.id})}" th:text="${opera.autore.nome}"></a>
+							<a th:href="@{autore(id=${opera.autore.id})}" th:text="${opera.autore.nome+ '  ' +opera.autore.cognome} "></a>
 						</td>
 						<td th:if="${admin}">
-							<a th:href="@{autoreAdmin(id=${opera.autore.id})}" th:text="${opera.autore.nome}"></a>
+							<a th:href="@{autoreAdmin(id=${opera.autore.id})}" th:text="${opera.autore.nome+'  ' +opera.autore.cognome}"></a>
 						</td>
 						<td>
 							<form th:action="@{opera(id=${opera.id})}" th:method="delete">
 								<div th:if="${admin}"><input type="submit" value="cancella" class="btn"/></div>
 							</form>
+							
+						</td>
+						<td>
+							<form th:action="@{editOpera(id=${opera.id})}" th:method="put">
+								<div th:if="${admin}"><input type="submit" value="modifica" class="btn"/></div>
+							</form>
 						</td>
 					</tr>
 				</tbody>
 			</table>
+
 		</div>
 		
 	

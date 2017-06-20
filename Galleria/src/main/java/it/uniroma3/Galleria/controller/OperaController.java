@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,17 +44,19 @@ public class OperaController {
 		return "mostraOpere";
 	}
 	
-	  // indirizza al form dell opera
+	  // Inserisci Opera
 	  @RequestMapping("/formOpera")
 	  public String formOpera(Model model) {
 		model.addAttribute("autori",this.autoreService.findAll());
-		if(!model.containsAttribute("opera"))
+		if (!model.containsAttribute("opera"))
 			model.addAttribute("opera", new Opera());
 	    return "formOpera";
 	  }
+
 	
 	//metodo per aggiungere opera
 	@RequestMapping(value="/opere",method=RequestMethod.POST)
+
 	public String addOpera(@Valid @ModelAttribute Opera opera, BindingResult result,Model model){
 		String nextPage;
 		if(opera.getAutore()==null){
@@ -64,23 +65,26 @@ public class OperaController {
 			nextPage="formAutore";
 		}
 		else if(result.hasErrors()){
+			model.addAttribute("error",true);
 			model.addAttribute("opera", opera);
 			return this.formOpera(model);
-			
 		}
 		else{
 			operaService.add(opera);
-			nextPage="/adminPage";
-			model.addAttribute("inserita",true);
+			model.addAttribute("aggiunta",true);
+			return this.getOpereAdmin(model);
 		}
 		return nextPage;
 	}
 	
 	//metodo per modificare un opera inserita
-	@RequestMapping(value="/opera{id}",method=RequestMethod.PUT)
-	public void updateOpera(@RequestParam Long id,Opera opera){
-		//Da implementare
-		//operaService.update(id, opera);
+	@RequestMapping(value="/editOpera{id}",method=RequestMethod.PUT)
+	public String updateOpera(@RequestParam Long id,Model model){
+		Opera operaDaModificare = this.operaService.findbyId(id);
+		this.operaService.delete(id);
+		model.addAttribute("opera",operaDaModificare);
+		model.addAttribute("modifica",true);
+		return this.formOpera(model);
 	}
 	
 	//metodo per cancellare opera
@@ -126,19 +130,6 @@ public class OperaController {
 		
 		return tipoRicerca;
 	}
-	
-	//Ricerca per autore nome cognome da implementare
-	/*private Long elaboraRicercaNomeCognome(String ricerca){
-		int indiceSpazio = ricerca.indexOf(' ');
-		if(indiceSpazio >0 && indiceSpazio<ricerca.length()-1){
-			String nome = ricerca.substring(0,indiceSpazio);
-			String cognome = ricerca.substring(indiceSpazio+1);
-			Autore autoreCercato = autoreService.findByNomeCognome(nome, cognome);
-			if(autoreCercato!=null)
-				return autoreCercato.getId();
-		}
-		return -1L;
-	}*/
 	
 	
 	private boolean isInt(String str) {

@@ -47,7 +47,6 @@ public class MainController {
 	  }
 	  
 	  
-	  
 	  @RequestMapping("/formAmministratore")
 	  public String formAmministratore(Model model){
 		  model.addAttribute("admin", new Amministratore());

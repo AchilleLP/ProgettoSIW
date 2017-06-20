@@ -41,10 +41,15 @@ public class AmministratoreService {
 		amministratoreRepository.delete(admin);
 	}
 	
+	@Transactional
 	public List<Amministratore> findAll(){
 		List<Amministratore> amministratori = new ArrayList<>();
 		amministratori.addAll((Collection<? extends Amministratore>) this.amministratoreRepository.findAll());
 		return amministratori;
+	}
+	@Transactional
+	public void delete(Long id) {
+		this.amministratoreRepository.delete(id);
 	}
 	
 }

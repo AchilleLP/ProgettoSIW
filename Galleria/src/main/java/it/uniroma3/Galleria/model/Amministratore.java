@@ -1,11 +1,14 @@
 package it.uniroma3.Galleria.model;
 
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -19,6 +22,7 @@ public class Amministratore {
 
 	private Long id;
 	@NotEmpty(message="Campo obbligatorio")
+	@Column(unique=true)
 	private String nickname;
 	@NotEmpty(message="Campo obbligatorio")
 	private String password;

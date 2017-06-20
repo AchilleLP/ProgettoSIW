@@ -1,10 +1,12 @@
 package it.uniroma3.Galleria.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,23 +22,36 @@ public class AutoreController {
 	
 	//metodo per aggiungere autore
 	@RequestMapping(value="/nuovoAutore",method=RequestMethod.POST)
-	public String addAutore(@ModelAttribute Autore autore,Model model){
-		autoreService.add(autore);
-		model.addAttribute("opera", new Opera());
-		model.addAttribute("autori",this.autoreService.findAll());
-		return "formOpera";
+	public String addAutore(@Valid @ModelAttribute Autore autore, BindingResult result,Model model){
+		if(result.hasErrors()){
+			model.addAttribute("autore",autore);
+			model.addAttribute("error",true);
+			return this.getFormAutore(model);
+		}
+		else{
+			autoreService.add(autore);
+			model.addAttribute("aggiunto",true);
+			Opera opera = new Opera();
+			opera.setAutore(autore);
+			model.addAttribute("opera", opera);
+			model.addAttribute("autori",this.autoreService.findAll());
+			return "formOpera";
+		}
+		
 	}
-	
+
 	@RequestMapping("/formAutore")
 	public String getFormAutore(Model model){
-		model.addAttribute("autore", new Autore());
+		if(!model.containsAttribute("autore"))
+			model.addAttribute("autore", new Autore());
 		return "formAutore";
 	}
 	
 	//metodo per visualizzare autore da utenteGenerico
 	@RequestMapping("/autore{id}")
 	public String getAutore(@RequestParam Long id,Model model){
-		model.addAttribute("user",true);
+		if(!model.containsAttribute("admin"))
+			model.addAttribute("user",true);
 		model.addAttribute("autore",this.autoreService.findbyId(id));
 		return "autore";	
 	}
@@ -45,8 +60,7 @@ public class AutoreController {
 	@RequestMapping("/autoreAdmin{id}")
 	public String getAutoreAdmin(@RequestParam Long id,Model model){
 		model.addAttribute("admin",true);
-		model.addAttribute("autore",this.autoreService.findbyId(id));
-		return "autore";	
+		return this.getAutore(id, model);	
 	}
 	
 	//metodo per visualizzare tutti gli autori

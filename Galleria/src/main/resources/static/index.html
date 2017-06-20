@@ -8,7 +8,7 @@
  
     body {
       	background: url(background.jpg);
-    	background-size: 1366px 768px;
+    	background-size: 1980px 980px;
     	background-repeat: no-repeat;
     }
  
@@ -37,7 +37,7 @@
 						
 						<!--Ricerca Opere  -->
 						
-						<form class="navbar-form navbar-left" th:action="@{ricercaOpere}">
+						<form class="navbar-form navbar-left" action="/ricercaOpere" method="get">
         					<div class="form-group">
          						<input type="text" class="form-control" placeholder="Cerca opera" name="ricerca"/>
          						<select name="tipoRicerca" class="form-control">
