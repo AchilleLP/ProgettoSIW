@@ -29,7 +29,7 @@ public class OperaController {
 	private AutoreService autoreService;
 	
 	//metodo per ottenere tutte le opere da utente generico
-	@RequestMapping("/opere")
+	@RequestMapping("/opere") 
 	public String getOpere(Model model){
 		model.addAttribute("opere",operaService.findAll());
 		model.addAttribute("user",true);
@@ -52,11 +52,12 @@ public class OperaController {
 			model.addAttribute("opera", new Opera());
 	    return "formOpera";
 	  }
-	
+
 	
 	//metodo per aggiungere opera
 	@RequestMapping(value="/opere",method=RequestMethod.POST)
-	public String addOpera(@Valid @ModelAttribute Opera opera,BindingResult result, Model model){
+
+	public String addOpera(@Valid @ModelAttribute Opera opera, BindingResult result,Model model){
 		String nextPage;
 		if(opera.getAutore()==null){
 			model.addAttribute("autore",new Autore());
@@ -72,7 +73,6 @@ public class OperaController {
 			nextPage="/adminPage";
 			model.addAttribute("inserita",true);
 		}
-
 		return nextPage;
 	}
 	
